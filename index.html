@@ -1297,7 +1297,7 @@ const CMD_STOP   = 0x0002;
 const CMD_ACK    = 0x0003;
 const CMD_SPIFFS = 0x0004;
 const SECTOR_SZ   = 4096;
-const PKT_PLOAD   = 247;  // max payload — may be reduced by MTU probe
+const PKT_PLOAD   = 23;  // max payload — may be reduced by MTU probe
 let   mtuPayload  = PKT_PLOAD; // actual payload used, set at connect time
 
 // ════════════════════════════════════════════════
@@ -1655,7 +1655,7 @@ function waitForFw(ms = 60000) {
 // Finds the largest writeValueWithoutResponse payload that succeeds.
 // The OTA packet has a 3-byte header, so usable payload = probed_size - 3.
 async function probeMTU(char) {
-  const candidates = [247, 185, 122, 23];
+  const candidates = [23];
   for (const size of candidates) {
     try {
       await char.writeValueWithoutResponse(new Uint8Array(size));
